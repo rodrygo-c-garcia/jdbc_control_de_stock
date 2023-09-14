@@ -10,6 +10,13 @@ public class Main {
     public static void main(String[] args)  {
         String url = "jdbc:mysql://localhost:3306/control_stock?useTimezone=true&serverTimezone=UTC";
         String user = "root";
+
+        List<Map<String, String>> datos = new ArrayList<>();
+        getData(url, user, datos);
+        showData(datos);
+    }
+
+    static public void getData(String url, String user, List<Map<String, String>> datos){
         // siempre tratar las conexiones dentro de un try catch
         try {
             Connection connection = DriverManager.getConnection(url, user, null);
@@ -17,13 +24,12 @@ public class Main {
             Statement statement = connection.createStatement();
             // execute() devuelve un booleano que indica si hubo conexion o no
             boolean result = statement.execute("SELECT * FROM producto");
-            System.out.println(result);
+            System.out.println("Connection: " + result);
 
             // ResultSet es una interfaz que se utiliza para representar el conjunto de resultados de una base de datos
             ResultSet resultSet = statement.executeQuery("SELECT * FROM producto");
             //ResultSet resultSet = statement.getResultSet();
 
-            List<Map<String, String>> datos = new ArrayList<>();
             // mientras tengamos datos para leer, vamos imprimiendo
             while (resultSet.next()) {
                 Map<String, String> fila = new HashMap<>();
@@ -35,10 +41,18 @@ public class Main {
                 // agregamos todos los registros a nuestra lista de datos
                 datos.add(fila);
             }
-            System.out.println(datos);
             connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    static public void showData(List<Map<String, String>> datos){
+        for(Map<String, String> dato : datos) {
+            System.out.print(dato.get("id"));
+            System.out.print(" | " + dato.get("nombre"));
+            System.out.print(" | " + dato.get("descripcion"));
+            System.out.println(" | " + dato.get("cantidad"));
         }
     }
 }
