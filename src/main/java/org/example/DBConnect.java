@@ -71,4 +71,21 @@ public class DBConnect {
             System.out.println(" | " + date.get("cantidad"));
         }
     }
+
+    public void saveData(){
+        try {
+            // RETURN_GENERATED_KEYS es una constante que se utiliza para obtener el id del registro que se acaba de insertar
+            this.statement.execute("INSERT INTO producto (nombre, descripcion, cantidad) VALUES ('VASO', 'Vaso de TE', 23), ('PLATO', 'Plato de comer', 10)", Statement.RETURN_GENERATED_KEYS);
+            // obtenemos el id del registro que se acaba de insertar
+            ResultSet resultSet = this.statement.getGeneratedKeys();
+            while (resultSet.next()) {
+                System.out.println("ID: " + resultSet.getInt(1));
+            }
+            //this.connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            System.out.println("Datos guardados");
+        }
+    }
 }
