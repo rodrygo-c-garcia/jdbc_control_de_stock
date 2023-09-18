@@ -14,7 +14,8 @@ public class Main {
         if(dbConnect.connectDB()) {
             dbConnect.getData();
 //            dbConnect.saveData();
-//            dbConnect.getData();
+            dbConnect.deleteData(3);
+            dbConnect.getData();
         } else {
             System.out.println("No se pudo conectar a la base de datos");
         }
