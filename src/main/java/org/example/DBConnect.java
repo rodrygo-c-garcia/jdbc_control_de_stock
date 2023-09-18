@@ -95,6 +95,8 @@ public class DBConnect {
     public void deleteData(int id){
         try {
             this.statement.execute("DELETE FROM producto WHERE id = " + id);
+            // con getUpdateCount() obtenemos el numero de filas afectadas
+            int rowsAffected = this.statement.getUpdateCount();
             //this.connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
