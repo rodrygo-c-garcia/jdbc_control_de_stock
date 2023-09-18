@@ -13,7 +13,8 @@ public class Main {
         DBConnect dbConnect = new DBConnect();
         if(dbConnect.connectDB()) {
             dbConnect.getData();
-            dbConnect.showData();
+//            dbConnect.saveData();
+//            dbConnect.getData();
         } else {
             System.out.println("No se pudo conectar a la base de datos");
         }
