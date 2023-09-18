@@ -91,4 +91,15 @@ public class DBConnect {
             System.out.println("Datos guardados");
         }
     }
+
+    public void deleteData(int id){
+        try {
+            this.statement.execute("DELETE FROM producto WHERE id = " + id);
+            //this.connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            System.out.println("Datos eliminados");
+        }
+    }
 }
