@@ -64,11 +64,11 @@ public class DBConnect {
      * @return void
      */
     public void showData(){
-        for(Map<String, String> dato : this.datos) {
-            System.out.print(dato.get("id"));
-            System.out.print(" | " + dato.get("nombre"));
-            System.out.print(" | " + dato.get("descripcion"));
-            System.out.println(" | " + dato.get("cantidad"));
+        for(Map<String, String> date : this.datos) {
+            System.out.print(date.get("id"));
+            System.out.print(" | " + date.get("nombre"));
+            System.out.print(" | " + date.get("descripcion"));
+            System.out.println(" | " + date.get("cantidad"));
         }
     }
 }
