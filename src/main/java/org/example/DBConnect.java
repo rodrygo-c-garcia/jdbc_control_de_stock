@@ -93,15 +93,27 @@ public class DBConnect {
     }
 
     public void deleteData(int id){
+        int rowsAffected = 0;
         try {
             this.statement.execute("DELETE FROM producto WHERE id = " + id);
             // con getUpdateCount() obtenemos el numero de filas afectadas
-            int rowsAffected = this.statement.getUpdateCount();
+            rowsAffected = this.statement.getUpdateCount();
             //this.connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            System.out.println("Datos eliminados");
+            System.out.println("Datos eliminados: "+ rowsAffected);
+        }
+    }
+
+    public void updateData(){
+        try {
+            this.statement.execute("UPDATE producto SET nombre = 'TENEDOR' WHERE id = 1", Statement.RETURN_GENERATED_KEYS);
+            //this.connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            System.out.println("Datos actualizados");
         }
     }
 }
