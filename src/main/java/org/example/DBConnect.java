@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 public class DBConnect {
+    // Connection es una interfaz que se utiliza para conectarse a una base de datos
     private Connection connection = null;
+    // Statement es una interfaz que se utiliza para ejecutar instrucciones SQL en una base de datos
     private Statement statement = null;
     private String url = "jdbc:mysql://localhost:3306/db_ctrl_stock?useTimezone=true&serverTimezone=UTC";
     private String user = "root";
@@ -54,9 +56,10 @@ public class DBConnect {
                 // agregamos todos los registros a nuestra lista de datos
                 this.datos.add(fila);
             }
-            connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            showData();
         }
     }
 
